@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import styled, { ThemeProvider } from 'styled-components';
 
-function App() {
+import Header from './components/Header';
+import Form from './components/Form';
+import CountryInfo from './components/CountryInfo';
+
+import { theme } from './style/theme';
+
+const App = () => {
+  const [searchCountry, setSearchCountry] = React.useState('');
+
+  const onSubmit = (newSearch) => {
+    setSearchCountry(newSearch);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <Main>
+        <Form onSubmit={onSubmit} />
+        <CountryInfo searchCountry={searchCountry} />
+      </Main>
+    </ThemeProvider>
   );
-}
+};
+
+const Main = styled.main`
+  width: 80%;
+  max-width: 720px;
+  margin: 0 auto;
+`;
 
 export default App;
