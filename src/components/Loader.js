@@ -37,7 +37,8 @@ const Square = styled.div`
     height: 50%;
     width: 50px;
     background: coral;
-    animation: ${flip} 1.2s linear infinite;
+    animation: ${flip} 2s linear infinite;
+    transform-origin: right bottom;
     &:nth-child(2) {
       border: 10px solid transparent;
       border-bottom-color: #ad60f5;
