@@ -4,49 +4,53 @@ import styled, { keyframes } from 'styled-components';
 const Loader = () => {
   return (
     <Wrapper>
-      <Square>
+      <Bouncer>
         <div></div>
         <div></div>
-      </Square>
+        <div></div>
+        <div></div>
+      </Bouncer>
     </Wrapper>
   );
 };
 
-const spinnerOne = keyframes`
-    0% {transform: rotate(0deg); border-width: 10px;}
-    50% {transform: rotate(180deg); border-width: 1px;}
-    100% {transform: rotate(360deg); border-width: 10px;}
-`
-
-const spinnerTwo = keyframes`
-    0% {transform: rotate(0deg); border-width: 1px;}
-    50% {transform: rotate(180deg); border-width: 10px;}
-    100% {transform: rotate(360deg); border-width: 1px;}
-`
-
-const Wrapper = styled.div``;
-
-const Square = styled.div`
-  width: 100px;
-  height: 100px;
-  position: relative;
-  perspective: 200px;
-  div {
-    position: absolute;
-    top: 0;
-    height: 50%;
-    width: 50px;
-    background: coral;
-    animation: ${flip} 2s linear infinite;
-    transform-origin: right bottom;
-    &:nth-child(2) {
-      border: 10px solid transparent;
-      border-bottom-color: #ad60f5;
-      animation: ${spinnerTwo} 1.2s linear infinite;
-    }
-  }
+const bouncer = keyframes`
+  from { transform: translateY(0) }
+  to { transform: translateY(-100px) }
 `;
 
+const Wrapper = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+`;
 
+const Bouncer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100px;
+  height: 100px;
+  div {
+    width: 20px;
+    height: 20px;
+    background: ${({theme}) => theme.primary};
+    border-radius: 50%;
+    animation: ${bouncer} 0.5s cubic-bezier(0.19, 0.57, 0.3, 0.98) infinite
+      alternate;
+  }
+  div:nth-child(2) {
+    animation-delay: 0.1s;
+    opacity: 0.8;
+  }
+  div:nth-child(3) {
+    animation-delay: 0.2s;
+    opacity: 0.6;
+  }
+  div:nth-child(4) {
+    animation-delay: 0.3s;
+    opacity: 0.4;
+  }
+`;
 
 export default Loader;
